@@ -21,10 +21,18 @@ function RecordSetter() {
   return (
     <div className={styles.content}>
       <div className={styles.mt2}>
-        {record.content.name && record.content.scope ? (
+        {record.content ? (
           <div className={styles.flexCol}>
-            <span className={styles.subtitle}>Hello {record.content.name}!</span>
-            <span className={styles.subtitle}>You are a {record.content.scope}!</span>
+             {record.content.name ? (
+            <span className={styles.subtitle}>Hello {record.content.name}!</span>)
+          : 
+          (<span className={styles.subtitle}>You forgot to tell us your name</span>)
+          }
+          {record.content.scope ? (
+            <span className={styles.subtitle}>You are a {record.content.scope}!</span>)
+          :
+          (<span className={styles.subtitle}>You forgot to tell us what you do</span>)
+          }
   
             <span>
               The above name was loaded from Ceramic Network. Try updating it
@@ -53,7 +61,7 @@ function RecordSetter() {
         onChange={(e) => setScope(e.target.value)}
         className={styles.mt2}
       />
-      <button onClick={() => updateRecord(name)}>Update</button>
+      <button onClick={() => updateRecord(name, scope)}>Update</button>
     </div>
   );
 }
